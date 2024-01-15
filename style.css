@@ -4,14 +4,14 @@
 }
 
 h1 {
-    background-color: #030637;
-    color: white;
-    text-align: center;
-    padding: 1rem;
+  background-color: #030637;
+  color: white;
+  text-align: center;
+  padding: 1rem;
 }
 
 .dice-container {
-  background-color: #3C0753;
+  background-color: #3c0753;
   padding: 5rem;
   display: flex;
   justify-content: center;
@@ -38,10 +38,14 @@ h1 {
   justify-content: center;
   align-items: center;
   padding: 5rem;
-  gap: 5rem;
+  gap: 8rem;
   text-align: center;
   background-color: #720455;
   color: white;
+}
+
+h2 {
+  font-size: 2rem;
 }
 
 .score {
@@ -56,7 +60,7 @@ h1 {
   align-items: center;
   gap: 1rem;
   padding: 3rem;
-  background-color: #910A67;
+  background-color: #910a67;
 }
 
 .during-game {
