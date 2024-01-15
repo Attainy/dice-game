@@ -8,16 +8,23 @@
 
 const leftScore = document.querySelector("div.left div.score");
 const rightScore = document.querySelector("div.right div.score");
+const btnRoleDice = document.querySelector("#role");
 
+let diceScore;
+let turn;
+
+function roleDiceResult (diceScore) {
+    if (diceScore <= 1) {
+
+    }
+    
+};
 
 
 function handleRoleDice () {
-    console.log((Math.random() * 6) + 1)
+    diceScore = Math.floor((Math.random() * 6) + 1);
+    console.log(diceScore);
 };
 
-window.onload = function() {
-    const btnRoleDice = document.querySelector("button.role");
-    btnRoleDice.addEventListener('click', handleRoleDice);
-}
+btnRoleDice.addEventListener('click', handleRoleDice);
 
-console.log(Math.floor((Math.random() * 6) + 1))
