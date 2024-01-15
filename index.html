@@ -7,8 +7,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="dice">
-      <!-- 주사위 굴리는 이미지 -->
+    <h1>Dice Game</h1>
+    <div class="dice-container">
+      <div class="dice">
+        <!-- 주사위 굴리는 이미지 -->
+        <div class="dice-1"></div>
+      </div>
     </div>
 
     <div class="board">
@@ -22,12 +26,13 @@
       </div>
     </div>
 
-    <div class="buttons">
-      <button id="role">Role Dice</button>
-      <button id="hold">Hold</button>
+    <div class="btn-container">
+      <div class="during-game">
+        <button id="role">Role Dice</button>
+        <button id="hold">Hold</button>
+      </div>
+      <button id="reset">New Game</button>
     </div>
-    <button id="reset">New Game</button>
-
-    <script src="script.js"></script>
   </body>
+  <script src="script.js"></script>
 </html>

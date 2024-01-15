@@ -9,13 +9,15 @@
 const leftScore = document.querySelector("div.left div.score");
 const rightScore = document.querySelector("div.right div.score");
 
-const btnRoleDice = document.querySelector("button.role");
 
-// const handleRoleDice = () => {
-//     console.log((Math.random() * 6) + 1)
-//     //return (Math.random() * 6) + 1
-// };
 
-// btnRoleDice.addEventListener(click, () => console.log((Math.random() * 6) + 1))
+function handleRoleDice () {
+    console.log((Math.random() * 6) + 1)
+};
+
+window.onload = function() {
+    const btnRoleDice = document.querySelector("button.role");
+    btnRoleDice.addEventListener('click', handleRoleDice);
+}
 
 console.log(Math.floor((Math.random() * 6) + 1))
