@@ -11,14 +11,12 @@ const rightScoreDiv = document.querySelector("div.right div.score");
 const btnRoleDice = document.querySelector("#role");
 const diceDiv = document.querySelector(".dice");
 
-//let leftScore = 
-console.log('score', leftScoreDiv.getAttribute('innerText'))
 let leftScore;
 let rightScore;
 let diceScore;
 let turn = true; // true = left, false = right
 
-
+/* 주사위가 1 또는 2로 나왔을 때 : 점수 초기화 후 턴 변경*/
 function resultOneOrTwo () {
     if (turn) {
         leftScoreDiv.innerText = '00';
@@ -29,6 +27,7 @@ function resultOneOrTwo () {
     }
 };
 
+/* 주사위가 3 이상이 나왔을 때 : 점수 누적. 주사위 계속 굴릴지 상대로 넘길지 선택*/
 function resultMoreThree () {
     if (turn) {
         leftScore += diceScore;
@@ -43,14 +42,13 @@ function roleDiceResult (diceScore) {
     if (diceScore <= 2) {
         resultOneOrTwo();
         turn = !turn;
-        console.log(turn);
     } else {
         resultMoreThree();
     }
     
 };
 
-
+/* 주사위 굴리는 버튼 눌렀을 때 이벤트 */
 function handleRoleDice () {
     diceScore = Math.floor((Math.random() * 6) + 1);
     console.log(diceScore);
