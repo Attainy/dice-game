@@ -6,16 +6,46 @@
 이후에 홀드 하고 현재 점수를 누적 점수에 더할지, 계속 주사위를 던질지 선택한다.
 */
 
-const leftScore = document.querySelector("div.left div.score");
-const rightScore = document.querySelector("div.right div.score");
+const leftScoreDiv = document.querySelector("div.left div.score");
+const rightScoreDiv = document.querySelector("div.right div.score");
 const btnRoleDice = document.querySelector("#role");
+const diceDiv = document.querySelector(".dice");
 
+//let leftScore = 
+console.log('score', leftScoreDiv.getAttribute('innerText'))
+let leftScore;
+let rightScore;
 let diceScore;
-let turn;
+let turn = true; // true = left, false = right
+
+
+function resultOneOrTwo () {
+    if (turn) {
+        leftScoreDiv.innerText = '00';
+        leftScore = 0;
+    } else {
+        rightScoreDiv.innerText = '00';
+        rightScore = 0;
+    }
+};
+
+function resultMoreThree () {
+    if (turn) {
+        leftScore += diceScore;
+        leftScoreDiv.innerText = leftScore.toString().padStart(2, '0');
+    } else {
+        rightScore += diceScore;
+        rightScoreDiv.innerText = leftScore.toString().padStart(2, '0');
+    }
+};
 
 function roleDiceResult (diceScore) {
-    if (diceScore <= 1) {
-
+    if (diceScore <= 2) {
+        resultOneOrTwo();
+        turn = !turn;
+        console.log(turn);
+    } else {
+        resultMoreThree();
     }
     
 };
@@ -24,6 +54,11 @@ function roleDiceResult (diceScore) {
 function handleRoleDice () {
     diceScore = Math.floor((Math.random() * 6) + 1);
     console.log(diceScore);
+    
+    diceDiv.innerText = diceScore;
+    diceDiv.style = "font-size:32px; padidng:20px auto;";
+
+    roleDiceResult(diceScore);
 };
 
 btnRoleDice.addEventListener('click', handleRoleDice);
