@@ -5,6 +5,8 @@
  3~6은 현재 점수에 나온 주사위 숫자를 더한다. 
 이후에 홀드 하고 현재 점수를 누적 점수에 더할지, 계속 주사위를 던질지 선택한다.
 */
+const leftPlayer = document.querySelector('div.left.player');
+const rightPlayer = document.querySelector('div.right.player');
 
 const leftScoreDiv = document.querySelector("div.left div.score");
 const rightScoreDiv = document.querySelector("div.right div.score");
@@ -14,10 +16,21 @@ const btnRoleDice = document.querySelector("#role");
 const btnHold = document.querySelector('#hold');
 const btnReset = document.querySelector('#reset');
 
-let leftScore;
-let rightScore;
+let leftScore = 0;
+let rightScore = 0;
 let diceScore;
 let turn = true; // true = left, false = right
+leftPlayer.style = "background-color: rgba(255, 203, 203)";
+
+function presentPlayerMark () {
+    if (turn) {
+        leftPlayer.style = "background-color: rgba(255, 203, 203)";
+        rightPlayer.style = "background-color: #720455";
+    } else {
+        rightPlayer.style = "background-color: rgba(255, 203, 203)";
+        leftPlayer.style = "background-color: #720455";
+    }
+}
 
 /* 주사위가 1 또는 2로 나왔을 때 : 점수 초기화 후 턴 변경*/
 function resultOneOrTwo () {
@@ -32,7 +45,7 @@ function resultOneOrTwo () {
 
 /* 주사위가 3 이상이 나왔을 때 : 점수 누적. 주사위 계속 굴릴지 상대로 넘길지 선택*/
 function resultMoreThree () {
-
+    btnHold.style = "display:visible";
 }
 
 
@@ -50,6 +63,8 @@ function addScore () {
 function handleHoldBtn () {
     addScore();
     turn = !turn;
+    presentPlayerMark();
+    btnHold.style = "display:none";
 }
 
 
@@ -58,6 +73,7 @@ function roleDiceResult (diceScore) {
     if (diceScore <= 2) {
         resultOneOrTwo();
         turn = !turn;
+        presentPlayerMark()
     } else { // 주사위가 3 이상이 나왔을 때 : 점수 누적. 주사위 계속 굴릴지 상대로 넘길지 선택
         resultMoreThree();
     }
