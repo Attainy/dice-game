@@ -8,8 +8,11 @@
 
 const leftScoreDiv = document.querySelector("div.left div.score");
 const rightScoreDiv = document.querySelector("div.right div.score");
-const btnRoleDice = document.querySelector("#role");
 const diceDiv = document.querySelector(".dice");
+
+const btnRoleDice = document.querySelector("#role");
+const btnHold = document.querySelector('#hold');
+const btnReset = document.querySelector('#reset');
 
 let leftScore;
 let rightScore;
@@ -29,6 +32,11 @@ function resultOneOrTwo () {
 
 /* 주사위가 3 이상이 나왔을 때 : 점수 누적. 주사위 계속 굴릴지 상대로 넘길지 선택*/
 function resultMoreThree () {
+
+}
+
+
+function addScore () {
     if (turn) {
         leftScore += diceScore;
         leftScoreDiv.innerText = leftScore.toString().padStart(2, '0');
@@ -38,15 +46,33 @@ function resultMoreThree () {
     }
 };
 
+/* Hold 버튼 눌렀을 때 이벤트 */
+function handleHoldBtn () {
+    addScore();
+    turn = !turn;
+}
+
+
 function roleDiceResult (diceScore) {
+    // 주사위가 1 또는 2로 나왔을 때 : 점수 초기화 후 턴 변경
     if (diceScore <= 2) {
         resultOneOrTwo();
         turn = !turn;
-    } else {
+    } else { // 주사위가 3 이상이 나왔을 때 : 점수 누적. 주사위 계속 굴릴지 상대로 넘길지 선택
         resultMoreThree();
     }
     
 };
+
+/* Reset 버튼 눌렀을 때 이벤트 */
+function handleResetBtn () {
+    leftScore = 0;
+    leftScoreDiv.innerText = '00';
+    rightScore = 0;
+    rightScoreDiv.innerText = '00';
+
+    turn = true;
+}
 
 /* 주사위 굴리는 버튼 눌렀을 때 이벤트 */
 function handleRoleDice () {
@@ -60,4 +86,5 @@ function handleRoleDice () {
 };
 
 btnRoleDice.addEventListener('click', handleRoleDice);
-
+btnHold.addEventListener('click', handleHoldBtn);
+btnReset.addEventListener('click', handleResetBtn);
