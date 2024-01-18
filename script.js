@@ -20,16 +20,16 @@ let leftScore = 0;
 let rightScore = 0;
 let diceScore;
 let turn = true; // true = left, false = right
-leftPlayer.style = "background-color: rgba(255, 203, 203)";
+leftPlayer.style = "background-color: var(--markColor)";
 
 /* 현재 플레이어 표시 */
 function presentPlayerMark () {
     if (turn) {
-        leftPlayer.style = "background-color: rgba(255, 203, 203)";
-        rightPlayer.style = "background-color: #720455";
+        leftPlayer.style = "background-color: var(--markColor)";
+        rightPlayer.style = "background-color: var(--scoreBoardColor)";
     } else {
-        rightPlayer.style = "background-color: rgba(255, 203, 203)";
-        leftPlayer.style = "background-color: #720455";
+        rightPlayer.style = "background-color: var(--markColor)";
+        leftPlayer.style = "background-color: var(--scoreBoardColor)";
     }
 }
 
@@ -44,7 +44,6 @@ function resetScore() {
     }
 }
 
-
 /* 점수 누적 */
 function addScore () {
     if (turn) {
@@ -52,7 +51,7 @@ function addScore () {
         leftScoreDiv.innerText = leftScore.toString().padStart(2, '0');
     } else {
         rightScore += diceScore;
-        rightScoreDiv.innerText = leftScore.toString().padStart(2, '0');
+        rightScoreDiv.innerText = rightScore.toString().padStart(2, '0');
     }
 };
 
@@ -64,7 +63,7 @@ function handleHoldBtn () {
     btnHold.style = "display:none"; // Hold 버튼 숨기기
 }
 
-
+/* 주사위 점수별 동작 */
 function roleDiceResult (diceScore) {
     // 주사위가 1 또는 2로 나왔을 때 : 점수 초기화 후 턴 변경
     if (diceScore <= 2) {
@@ -74,7 +73,6 @@ function roleDiceResult (diceScore) {
 
         // 주사위가 3 이상이 나왔을 때 : 점수 누적. 주사위 계속 굴릴지 상대로 넘길지 선택
     } else { 
-        addScore(); // 점수 누적
         btnHold.style = "display:visible"; // hold 버튼 등장
     }
     
@@ -82,13 +80,15 @@ function roleDiceResult (diceScore) {
 
 /* 주사위 굴리는 버튼 눌렀을 때 이벤트 */
 function handleRoleDice () {
+    // 주사위 점수
     diceScore = Math.floor((Math.random() * 6) + 1);
-    console.log(diceScore);
     
+    // (임시) 주사위에 주사위 점수 표시
     diceDiv.innerText = diceScore;
     diceDiv.style = "font-size:32px; padidng:20px auto;";
 
     roleDiceResult(diceScore);
+    console.log('left', leftScore, 'right', rightScore);
 };
 
 /* Reset 버튼 눌렀을 때 이벤트 */

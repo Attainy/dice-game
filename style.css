@@ -1,3 +1,8 @@
+:root {
+  --markColor: #FF90BC;
+  --scoreBoardColor: #720455;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -37,14 +42,20 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5rem;
+  padding: 4rem;
   gap: 8rem;
   text-align: center;
-  background-color: #720455;
+  background-color: var(--scoreBoardColor);
   color: white;
 }
 
+div.player {
+  padding: 1rem 2.5rem;
+  border-radius: 40%;
+}
+
 h2 {
+  margin-top: 1rem;
   font-size: 2rem;
 }
 
