@@ -44,14 +44,29 @@ function resetScore() {
     }
 }
 
+/* 게임 종료 시 */
+function gameOver () {
+    const gameOverPopUp = document.createElement('div');
+    gameOverPopUp.style = "background-color:white; width: 500px; height: 500px;"
+    
+}
+
 /* 점수 누적 */
 function addScore () {
     if (turn) {
         leftScore += diceScore;
         leftScoreDiv.innerText = leftScore.toString().padStart(2, '0');
+
+        if (leftScore === 50) {
+            gameOver();
+        }
     } else {
         rightScore += diceScore;
         rightScoreDiv.innerText = rightScore.toString().padStart(2, '0');
+
+        if (rightScore === 50) {
+            gameOver();
+        }
     }
 };
 
