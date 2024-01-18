@@ -22,6 +22,7 @@ let diceScore;
 let turn = true; // true = left, false = right
 leftPlayer.style = "background-color: rgba(255, 203, 203)";
 
+/* 현재 플레이어 표시 */
 function presentPlayerMark () {
     if (turn) {
         leftPlayer.style = "background-color: rgba(255, 203, 203)";
@@ -32,8 +33,8 @@ function presentPlayerMark () {
     }
 }
 
-/* 주사위가 1 또는 2로 나왔을 때 : 점수 초기화 후 턴 변경*/
-function resultOneOrTwo () {
+/* 점수 초기화 */
+function resetScore() {
     if (turn) {
         leftScoreDiv.innerText = '00';
         leftScore = 0;
@@ -41,14 +42,10 @@ function resultOneOrTwo () {
         rightScoreDiv.innerText = '00';
         rightScore = 0;
     }
-};
-
-/* 주사위가 3 이상이 나왔을 때 : 점수 누적. 주사위 계속 굴릴지 상대로 넘길지 선택*/
-function resultMoreThree () {
-    btnHold.style = "display:visible";
 }
 
 
+/* 점수 누적 */
 function addScore () {
     if (turn) {
         leftScore += diceScore;
@@ -61,34 +58,27 @@ function addScore () {
 
 /* Hold 버튼 눌렀을 때 이벤트 */
 function handleHoldBtn () {
-    addScore();
-    turn = !turn;
-    presentPlayerMark();
-    btnHold.style = "display:none";
+    addScore();             // 점수 누적
+    turn = !turn;           // 턴 변경
+    presentPlayerMark();    // 현재 플레이어 표시
+    btnHold.style = "display:none"; // Hold 버튼 숨기기
 }
 
 
 function roleDiceResult (diceScore) {
     // 주사위가 1 또는 2로 나왔을 때 : 점수 초기화 후 턴 변경
     if (diceScore <= 2) {
-        resultOneOrTwo();
-        turn = !turn;
+        resetScore(); // 점수 초기화
+        turn = !turn; // 턴 변경
         presentPlayerMark()
-    } else { // 주사위가 3 이상이 나왔을 때 : 점수 누적. 주사위 계속 굴릴지 상대로 넘길지 선택
-        resultMoreThree();
+
+        // 주사위가 3 이상이 나왔을 때 : 점수 누적. 주사위 계속 굴릴지 상대로 넘길지 선택
+    } else { 
+        addScore(); // 점수 누적
+        btnHold.style = "display:visible"; // hold 버튼 등장
     }
     
 };
-
-/* Reset 버튼 눌렀을 때 이벤트 */
-function handleResetBtn () {
-    leftScore = 0;
-    leftScoreDiv.innerText = '00';
-    rightScore = 0;
-    rightScoreDiv.innerText = '00';
-
-    turn = true;
-}
 
 /* 주사위 굴리는 버튼 눌렀을 때 이벤트 */
 function handleRoleDice () {
@@ -100,6 +90,20 @@ function handleRoleDice () {
 
     roleDiceResult(diceScore);
 };
+
+/* Reset 버튼 눌렀을 때 이벤트 */
+function handleResetBtn () {
+    // 점수 초기화
+    leftScore = 0;
+    leftScoreDiv.innerText = '00';
+    rightScore = 0;
+    rightScoreDiv.innerText = '00';
+
+    // 턴 변경
+    turn = true;
+}
+
+
 
 btnRoleDice.addEventListener('click', handleRoleDice);
 btnHold.addEventListener('click', handleHoldBtn);
