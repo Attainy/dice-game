@@ -70,17 +70,15 @@ h2 {
 
 .btn-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  gap: 1rem;
-  padding: 3rem;
+  padding: 3rem 4rem;
   background-color: #910a67;
 }
 
 .during-game {
   display: flex;
-  justify-items: center;
+  justify-content: center;
   align-items: center;
   gap: 2rem;
 }
