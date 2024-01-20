@@ -28,16 +28,37 @@ h1 {
   height: 8rem;
   border-radius: 10px;
   background-color: white;
+  
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 
 .dice-1 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/*주사위 */
+ .pip {
   width: 1rem;
   height: 1rem;
   border-radius: 50px;
   background-color: black;
-  margin: auto auto;
 }
 
+
+
+/* .dice-2, .dice-3, .dice-4, .dice-5, .dice-6 {
+  display: none;
+}
+
+.dice-2 {
+  display: initial;
+} */
+
+
+
+/* 점수판 */
 .board {
   display: flex;
   justify-content: center;
