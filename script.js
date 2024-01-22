@@ -1,13 +1,14 @@
-/*
-번갈아 가면서 주사위를 던지는 게임입니다. 먼저 누적 점수 50점을 만들면 이깁니다.
+/* 번갈아 가면서 주사위를 던지는 게임입니다. 먼저 누적 점수 50점을 만들면 이깁니다.
 
 주사위를 던졌을 때 숫자가 나오면 1~2는 본인 현재 점수 초기화 후 턴 변경,
 3~6은 현재 점수에 나온 주사위 숫자를 더한다. 
-이후에 홀드 하고 현재 점수를 누적 점수에 더할지, 계속 주사위를 던질지 선택한다.
-*/
+이후에 홀드 하고 현재 점수를 누적 점수에 더할지, 계속 주사위를 던질지 선택한다. */
+
+/* 플레이어 */
 const leftPlayer = document.querySelector('div.left.player');
 const rightPlayer = document.querySelector('div.right.player');
 
+/* 점수 */
 const leftScoreDiv = document.querySelector("div.left div.score");
 const rightScoreDiv = document.querySelector("div.right div.score");
 const diceDiv = document.querySelector(".dice");
@@ -40,9 +41,11 @@ function changeDiceShape (diceScore) {
     }
 
     if (diceScore === 3) {
-        diceDiv.classList = 'dice dice-3'
+        diceDiv.classList = 'dice dice-3';
     } else if (diceScore === 5) {
-        diceDiv.classList = 'dice dice-5'
+        diceDiv.classList = 'dice dice-5';
+    } else {
+        diceDiv.classList = 'dice';
     }
 };
 
@@ -146,16 +149,17 @@ function roleDiceResult (diceScore) {
 
 /* 주사위 굴리는 버튼 눌렀을 때 이벤트 */
 function handleRoleDice () {
+
     // 주사위 점수
     diceScore = Math.floor((Math.random() * 6) + 1);
 
+    // 주사위 모양 바꾸기
     changeDiceShape(diceScore);
     
-    // (임시) 주사위에 주사위 점수 표시
-    // diceDiv.innerText = diceScore;
-    // diceDiv.style = "font-size:32px; padidng:20px auto;";
-
+    // 점수별 동작
     roleDiceResult(diceScore);
+
+
     console.log('turn: ', turn, 'left', leftScore, 'right', rightScore);
     console.log('diceScore', diceScore)
 };
