@@ -2,7 +2,7 @@
 번갈아 가면서 주사위를 던지는 게임입니다. 먼저 누적 점수 50점을 만들면 이깁니다.
 
 주사위를 던졌을 때 숫자가 나오면 1~2는 본인 현재 점수 초기화 후 턴 변경,
- 3~6은 현재 점수에 나온 주사위 숫자를 더한다. 
+3~6은 현재 점수에 나온 주사위 숫자를 더한다. 
 이후에 홀드 하고 현재 점수를 누적 점수에 더할지, 계속 주사위를 던질지 선택한다.
 */
 const leftPlayer = document.querySelector('div.left.player');
@@ -12,9 +12,10 @@ const leftScoreDiv = document.querySelector("div.left div.score");
 const rightScoreDiv = document.querySelector("div.right div.score");
 const diceDiv = document.querySelector(".dice");
 
+/* 버튼 */
 const btnLeftRoleDice = document.querySelector(".left button.role");
-const btnLeftHold = document.querySelector('.left button.hold');
 const btnRightRoleDice = document.querySelector(".right button.role");
+const btnLeftHold = document.querySelector('.left button.hold');
 const btnRightHold = document.querySelector('.right button.hold');
 const btnReset = document.querySelector('#reset');
 
@@ -27,6 +28,20 @@ leftPlayer.style = "background-color: var(--markColor)";
 btnRightRoleDice.style = "display:none";
 btnLeftHold.style = "display:none";
 btnRightHold.style = "display:none";
+
+/* 주사위 모양 바꾸기 */
+function changeDiceShape (diceScore) {
+    diceDiv.querySelectorAll(".pip").style = "display: none";
+    for (let idx=1; idx<=diceScore; idx++) {
+        diceDiv.querySelector(`.pip:nth-child(${idx})`).style = "display: initial";
+    }
+
+    if (diceScore === 3) {
+        diceDiv.className += 'dice-3';
+    } else if (diceScore === 5) {
+        diceDiv.classList.add = 'dice-5';
+    }
+};
 
 /* Turn 변경 */
 function turnChange (presentTurn) {
@@ -130,10 +145,12 @@ function roleDiceResult (diceScore) {
 function handleRoleDice () {
     // 주사위 점수
     diceScore = Math.floor((Math.random() * 6) + 1);
+
+    changeDiceShape(diceScore);
     
     // (임시) 주사위에 주사위 점수 표시
-    diceDiv.innerText = diceScore;
-    diceDiv.style = "font-size:32px; padidng:20px auto;";
+    // diceDiv.innerText = diceScore;
+    // diceDiv.style = "font-size:32px; padidng:20px auto;";
 
     roleDiceResult(diceScore);
     console.log('turn: ', turn, 'left', leftScore, 'right', rightScore);

@@ -29,14 +29,18 @@ h1 {
   border-radius: 10px;
   background-color: white;
   
-  display: grid;
-  justify-content: center;
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center; */
+
+  display: flex;
+  justify-content: space-evenly;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem 3rem;
+  position: relative;
 }
 
-.dice-1 {
-  grid-template-columns: repeat(2, 1fr);
-}
 
 /*주사위 */
  .pip {
@@ -44,18 +48,25 @@ h1 {
   height: 1rem;
   border-radius: 50px;
   background-color: black;
-}
 
-
-
-/* .dice-2, .dice-3, .dice-4, .dice-5, .dice-6 {
   display: none;
 }
 
-.dice-2 {
-  display: initial;
-} */
+/* 주사위 눈이 3개일 때 */
+.dice-3 {
+  gap: 1rem;
+}
+.dice-3 .pip:nth-child(1) {
+  transform: translateY(2rem)
+}
+.dice-3 .pip:nth-child(3) {
+  transform: translateY(-2rem);
+}
 
+/* 주사위 눈이 5개일 때 */
+.dice-5 .pip:nth-child(5) {
+  position: absolute;
+}
 
 
 /* 점수판 */
