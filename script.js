@@ -31,15 +31,18 @@ btnRightHold.style = "display:none";
 
 /* 주사위 모양 바꾸기 */
 function changeDiceShape (diceScore) {
-    diceDiv.querySelectorAll(".pip").style = "display: none";
-    for (let idx=1; idx<=diceScore; idx++) {
-        diceDiv.querySelector(`.pip:nth-child(${idx})`).style = "display: initial";
+    for (let idx=1; idx<=6; idx++) {
+        if (idx<=diceScore) {
+            diceDiv.querySelector(`.pip:nth-child(${idx})`).style = "display: initial";
+        } else {
+            diceDiv.querySelector(`.pip:nth-child(${idx})`).style = "display: none";
+        }
     }
 
     if (diceScore === 3) {
-        diceDiv.className += 'dice-3';
+        diceDiv.classList = 'dice dice-3'
     } else if (diceScore === 5) {
-        diceDiv.classList.add = 'dice-5';
+        diceDiv.classList = 'dice dice-5'
     }
 };
 
