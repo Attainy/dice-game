@@ -1,6 +1,8 @@
 :root {
+  --headerColor: #030637;
   --markColor: #FF90BC;
   --scoreBoardColor: #720455;
+  --btnContainerColor: #910a67;
 }
 
 * {
@@ -8,8 +10,12 @@
   padding: 0;
 }
 
+body {
+  background-color: var(--btnContainerColor);
+}
+
 h1 {
-  background-color: #030637;
+  background-color: var(--headerColor);
   color: white;
   text-align: center;
   padding: 1rem;
@@ -68,10 +74,6 @@ h1 {
   position: absolute;
 }
 
-.dice {
-  animation: ;
-}
-
 
 /* 점수판 */
 .board {
@@ -109,7 +111,7 @@ h2 {
   justify-content: space-around;
   align-items: center;
   padding: 3rem 4rem;
-  background-color: #910a67;
+  background-color: var(--btnContainerColor);
 }
 
 .during-game {
@@ -127,4 +129,18 @@ button {
   border-radius: 10px;
   border: none;
   cursor: pointer;
+}
+
+.reset-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+#reset {
+  position: absolute;
+  top: -1rem;
 }
