@@ -25,6 +25,7 @@ let leftScore = 0;
 let rightScore = 0;
 let diceScore;
 let turn = true; // true = left, false = right
+let finalScore = 50; // 게임 종료되는 점수
 leftPlayer.style = "background-color: var(--markColor)";
 btnRightRoleDice.style = "display:none";
 btnLeftHold.style = "display:none";
@@ -128,14 +129,14 @@ function addScore () {
         leftScore += diceScore;
         leftScoreDiv.innerText = leftScore.toString().padStart(2, '0');
 
-        if (leftScore >= 5) {
+        if (leftScore >= finalScore) {
             gameOver();
         }
     } else {
         rightScore += diceScore;
         rightScoreDiv.innerText = rightScore.toString().padStart(2, '0');
 
-        if (rightScore >= 5) {
+        if (rightScore >= finalScore) {
             gameOver();
         }
     }
