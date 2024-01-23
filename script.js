@@ -94,8 +94,32 @@ function resetScore() {
 /* 게임 종료 시 */
 function gameOver () {
     const gameOverPopUp = document.createElement('div');
-    gameOverPopUp.style = "background-color:white; width: 500px; height: 500px;"
-    
+    const gameOverH1 = document.createElement('h1');
+    const gameOverH2 = document.createElement('h2');
+    const gameOverButton = document.createElement('a');
+
+    document.body.appendChild(gameOverPopUp);
+    gameOverPopUp.appendChild(gameOverH1);
+    gameOverPopUp.appendChild(gameOverH2);
+    gameOverPopUp.appendChild(gameOverButton);
+    gameOverPopUp.classList = 'game-over';
+
+    gameOverButton.addEventListener('click', handleResetBtn);
+
+    gameOverH1.innerText = '게임 종료';
+    gameOverButton.innerText = 'New Game';
+    if (turn) {
+        gameOverH2.innerText = 'Winner : Player 1';
+    } else {
+        gameOverH2.innerText = 'Winner : Player 2';
+    }
+
+    btnLeftRoleDice.removeEventListener('click', handleRoleDice);
+    btnRightRoleDice.removeEventListener('click', handleRoleDice);
+    btnLeftHold.removeEventListener('click', handleHoldBtn);
+    btnRightHold.removeEventListener('click', handleHoldBtn);
+
+    btnReset.style = 'diplay: none';
 }
 
 /* 점수 누적 */
@@ -104,14 +128,14 @@ function addScore () {
         leftScore += diceScore;
         leftScoreDiv.innerText = leftScore.toString().padStart(2, '0');
 
-        if (leftScore === 50) {
+        if (leftScore >= 5) {
             gameOver();
         }
     } else {
         rightScore += diceScore;
         rightScoreDiv.innerText = rightScore.toString().padStart(2, '0');
 
-        if (rightScore === 50) {
+        if (rightScore >= 5) {
             gameOver();
         }
     }
@@ -119,13 +143,13 @@ function addScore () {
 
 /* Hold 버튼 눌렀을 때 이벤트 */
 function handleHoldBtn () {
-    turnChange(!turn);   // Turn 변경
-
     if (turn) {
         btnLeftHold.style = "display:none"; // Hold 버튼 숨기기
     } else {
         btnRightHold.style = "display:none"; // Hold 버튼 숨기기
     }
+
+    turnChange(!turn);   // Turn 변경
 }
 
 /* 주사위 점수별 동작 */
@@ -140,8 +164,10 @@ function roleDiceResult (diceScore) {
         addScore();
         if (turn) {
             btnLeftHold.style = "display: visible"; // hold 버튼 등장
+            
         } else {
             btnRightHold.style = "display: visible"; // hold 버튼 등장
+            
         }
     }
     
@@ -164,6 +190,8 @@ function handleRoleDice () {
     console.log('diceScore', diceScore)
 };
 
+
+
 /* Reset 버튼 눌렀을 때 이벤트 */
 function handleResetBtn () {
     // 점수 초기화
@@ -172,10 +200,12 @@ function handleResetBtn () {
     rightScore = 0;
     rightScoreDiv.innerText = '00';
 
-    // 턴 변경
-    turnChange(true);
+    turn = true; // true = left, false = right
+    leftPlayer.style = "background-color: var(--markColor)";
+    btnRightRoleDice.style = "display:none";
+    btnLeftHold.style = "display:none";
+    btnRightHold.style = "display:none";
 }
-
 
 
 btnLeftRoleDice.addEventListener('click', handleRoleDice);
@@ -183,3 +213,5 @@ btnRightRoleDice.addEventListener('click', handleRoleDice);
 btnLeftHold.addEventListener('click', handleHoldBtn);
 btnRightHold.addEventListener('click', handleHoldBtn);
 btnReset.addEventListener('click', handleResetBtn);
+
+
